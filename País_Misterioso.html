@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>País Misterioso</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{--sky:#5c94fc;--ink:#000;--brick:#c84c0c;--grass:#00a800;--gold:#fcc800;--red:#c81800;--yel:#fcc800;--grn:#008800;--cloud:#fff;--txt:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#10104c;--cloud:#8890d8;--grass:#006800}}
+:root[data-theme="dark"]{--sky:#10104c;--cloud:#8890d8;--grass:#006800}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--sky);color:var(--txt);font-family:'Press Start 2P','Courier New',monospace;font-size:10px;line-height:1.6;image-rendering:pixelated;overflow-x:hidden}
+button,input{font:inherit}
+.cl{position:fixed;background:var(--cloud);width:112px;height:40px;clip-path:polygon(0 100%,0 60%,12% 60%,12% 40%,28% 40%,28% 0,60% 0,60% 40%,78% 40%,78% 60%,100% 60%,100% 100%);z-index:0}
+.c1{top:10%;left:6%}.c2{top:22%;right:8%;transform:scale(1.4)}.c3{top:55%;left:45%;transform:scale(.8)}
+.hill{position:fixed;bottom:56px;background:var(--grass);clip-path:polygon(0 100%,0 80%,15% 80%,15% 60%,30% 60%,30% 35%,70% 35%,70% 60%,85% 60%,85% 80%,100% 80%,100% 100%);z-index:0}
+.h1{left:-30px;width:240px;height:130px}.h2{right:-20px;width:170px;height:90px}
+.pipe{position:fixed;bottom:56px;width:64px;background:var(--grass);border:4px solid #000;border-bottom:0;box-shadow:inset 10px 0 0 #5cdc5c;z-index:0}
+.pipe::before{content:"";position:absolute;left:-12px;right:-12px;top:-4px;height:24px;background:var(--grass);border:4px solid #000;box-shadow:inset 10px 0 0 #5cdc5c}
+.p1{right:10%;height:90px}.p2{right:calc(10% + 110px);height:56px}
+.ground{position:fixed;left:0;right:0;bottom:0;height:56px;z-index:1;border-top:4px solid #000;background:var(--brick) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' shape-rendering='crispEdges'%3E%3Crect width='32' height='32' fill='%23c84c0c'/%3E%3Crect width='32' height='2' fill='%23000'/%3E%3Crect y='16' width='32' height='2' fill='%23000'/%3E%3Crect width='2' height='16' fill='%23000'/%3E%3Crect x='16' y='16' width='2' height='16' fill='%23000'/%3E%3Crect x='2' y='2' width='14' height='2' fill='%23fca044'/%3E%3Crect x='18' y='18' width='14' height='2' fill='%23fca044'/%3E%3C/svg%3E")}
+main{position:relative;z-index:2;max-width:780px;margin:0 auto;padding:20px 14px 90px}
+.hidden{display:none!important}
+.panel{background:#000;border:4px solid #fff;box-shadow:0 0 0 4px #000;padding:16px;margin:8px 4px 18px}
+.logo{text-align:center;margin:28px 0 10px}
+.logo span{display:block;font-size:clamp(26px,8vw,52px);line-height:1.15;color:#fc7460;text-shadow:3px 3px 0 #000,-3px 3px 0 #000,3px -3px 0 #000,-3px -3px 0 #000,0 6px 0 #a81000,3px 6px 0 #000,-3px 6px 0 #000}
+.logo span+span{color:var(--gold);text-shadow:3px 3px 0 #000,-3px 3px 0 #000,3px -3px 0 #000,-3px -3px 0 #000,0 6px 0 #b87800,3px 6px 0 #000,-3px 6px 0 #000}
+.sub{text-align:center;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000,2px 2px #000,-2px -2px #000,2px -2px #000,-2px 2px #000;margin:18px 0}
+.qb{width:44px;height:44px;margin:0 auto 6px;background:var(--gold);border:4px solid #000;box-shadow:inset -4px -4px 0 #b87800,inset 4px 4px 0 #fce8a0;color:#000;display:grid;place-items:center;font-size:18px;animation:bob 1.2s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+@keyframes blink{50%{opacity:0}}
+.btn{display:block;margin:12px auto 0;background:#e45c10;color:#fff;border:4px solid #000;box-shadow:inset -4px -4px 0 #a82800,inset 4px 4px 0 #fc9838;padding:12px 18px;cursor:pointer;text-shadow:2px 2px #000}
+.btn:active{transform:translateY(3px)}
+.start{animation:blink 1s steps(1) infinite;font-size:14px}
+.how p{margin:0 0 10px}
+.lg{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.lg span{display:flex;align-items:center;gap:6px;font-size:8px}
+.lg i{width:18px;height:18px;border:3px solid #fff;display:inline-block}
+.r{background:var(--red)}.y{background:var(--yel)}.g{background:var(--grn)}
+.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000,2px 2px #000,-2px -2px #000,2px -2px #000,-2px 2px #000;margin:4px 4px 14px;font-size:9px}
+.hud b{display:block;font-weight:400;font-size:11px;color:#fff}
+.coins{letter-spacing:3px;color:var(--gold)}
+.row{display:flex;gap:8px}
+#in{flex:1;min-width:0;background:#fff;color:#000;border:4px solid #fc7460;padding:12px 10px;font-size:11px;border-radius:0}
+.row .btn{margin:0}
+.msg{min-height:22px;margin:12px 0 0;font-size:9px;line-height:1.7}
+.msg.bad{color:#fc7460}.msg.ok{color:#58f858}
+.guess{margin:0 4px 16px;border:4px solid #000;background:#000;box-shadow:0 0 0 4px #fff}
+.rh{padding:8px 10px;font-size:10px;display:flex;justify-content:space-between}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:4px;padding:4px;background:#000}
+.t{border:4px solid #000;padding:8px 6px;display:flex;flex-direction:column;gap:6px;min-height:112px;color:#fff}
+.t.y{color:#000}
+.t b{font-weight:400;font-size:8px}
+.t span{font-size:11px;line-height:1.4}
+.t em{font-size:8px;font-style:normal;line-height:1.5}
+.t i{font-size:8px;font-style:normal;margin-top:auto;background:#000;color:#fff;padding:3px 4px;align-self:flex-start}
+.final{text-align:center}
+.final h2{font-size:16px;margin:6px 0 14px;color:var(--gold);text-shadow:2px 2px #000}
+.big{font-size:22px;margin:10px 0}
+.tog{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:8px;z-index:5;background:#000;color:#fff;border:3px solid #fff;padding:6px 8px;font-size:8px;cursor:pointer}
+:focus-visible{outline:4px solid var(--gold);outline-offset:2px}
+@media (max-width:560px){.hud{grid-template-columns:1fr 1fr}.p2,.h2{display:none}}
+@media (prefers-reduced-motion:reduce){.qb,.start{animation:none}}
+</style>
+</head>
+<body>
+<div class="cl c1"></div><div class="cl c2"></div><div class="cl c3"></div>
+<div class="hill h1"></div><div class="hill h2"></div>
+<div class="pipe p1"></div><div class="pipe p2"></div>
+<div class="ground"></div>
+<button class="tog" id="snd" aria-label="Ligar ou desligar o som">SOM: LIGADO</button>
+
+<main>
+<section id="title">
+  <div class="logo"><div class="qb" aria-hidden="true">?</div><span>PAÍS</span><span>MISTERIOSO</span></div>
+  <p class="sub">UMA AVENTURA GEOGRÁFICA</p>
+  <div class="panel how">
+    <p>Descubra o país secreto em 6 tentativas. Cada palpite revela 5 pistas:</p>
+    <p>hemisfério, continente, temperatura média, população e coordenadas.</p>
+    <p>Acertar rápido rende mais pontos. Acertos seguidos dão bônus. São 5 fases.</p>
+    <div class="lg"><span><i class="r"></i>LONGE</span><span><i class="y"></i>PERTO</span><span><i class="g"></i>CERTO</span></div>
+  </div>
+  <button class="btn start" id="go">PRESSIONE START</button>
+  <p class="sub">RECORDE <span id="rec0">000000</span></p>
+</section>
+
+<section id="game" class="hidden">
+  <div class="hud">
+    <div>PONTOS<b id="hs">000000</b></div>
+    <div>FASE<b id="hr">1-1</b></div>
+    <div>RECORDE<b id="hh">000000</b></div>
+    <div>TENTATIVAS<b id="hl" class="coins"></b></div>
+  </div>
+  <div class="panel">
+    <div class="row">
+      <input id="in" list="dl" autocomplete="off" placeholder="DIGITE UM PAÍS" aria-label="Nome do país">
+      <button class="btn" id="ok">ENVIAR</button>
+    </div>
+    <datalist id="dl"></datalist>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+    <button class="btn hidden" id="next">PRÓXIMA FASE</button>
+  </div>
+  <div id="rows"></div>
+  <div class="lg" style="margin:0 6px;text-shadow:2px 2px #000"><span><i class="r"></i>LONGE</span><span><i class="y"></i>PERTO</span><span><i class="g"></i>CERTO</span></div>
+</section>
+
+<section id="end" class="hidden">
+  <div class="panel final">
+    <h2>FIM DE JOGO</h2>
+    <p>PONTUAÇÃO FINAL</p>
+    <div class="big" id="fs">000000</div>
+    <p id="fr"></p>
+    <p id="fn"></p>
+    <button class="btn" id="again">JOGAR DE NOVO</button>
+  </div>
+</section>
+</main>
+
+<script>
+const ANo="América do Norte",ASu="América do Sul",EUR="Europa",AFR="África",ASI="Ásia",OCE="Oceania";
+// nome, latitude, longitude, continente, temperatura média (°C), população (milhões)
+const C=[
+["Brasil",-10,-52,"América do Sul",25,216],["Argentina",-34,-64,"América do Sul",14,46],["Chile",-33,-71,"América do Sul",12,19.5],
+["Peru",-10,-76,"América do Sul",19,34],["Colômbia",4,-72,"América do Sul",24,52],["Venezuela",7,-66,"América do Sul",25,28],
+["Bolívia",-17,-65,"América do Sul",17,12],["Uruguai",-33,-56,"América do Sul",17,3.4],["Equador",-1,-78,"América do Sul",21,18],
+["Paraguai",-23,-58,"América do Sul",23,6.8],["México",23,-102,"América do Norte",21,128],["Estados Unidos",39,-98,"América do Norte",12,335],
+["Canadá",56,-106,"América do Norte",-4,40],["Cuba",22,-79,"América do Norte",25,11],["Guatemala",15.5,-90,"América do Norte",23,17.6],
+["Portugal",39.5,-8,"Europa",16,10.4],["Espanha",40,-4,"Europa",15,48],["França",46,2,"Europa",12,68],["Alemanha",51,10,"Europa",10,84],
+["Itália",42.5,12.5,"Europa",14,59],["Reino Unido",54,-2,"Europa",9,67],["Noruega",62,10,"Europa",2,5.5],["Suécia",62,15,"Europa",2,10.5],
+["Polônia",52,19,"Europa",9,37],["Grécia",39,22,"Europa",16,10.4],["Egito",27,30,"África",22,112],["Nigéria",9,8,"África",27,223],
+["África do Sul",-29,24,"África",17,60],["Quênia",0.5,38,"África",19,55],["Marrocos",32,-6,"África",18,37],["Etiópia",9,40,"África",22,126],
+["Angola",-12.5,18.5,"África",22,36],["Madagascar",-19,47,"África",24,30],["China",35,103,"Ásia",8,1410],["Índia",21,78,"Ásia",25,1428],
+["Japão",36,138,"Ásia",12,124],["Indonésia",-2,118,"Ásia",26,277],["Arábia Saudita",24,45,"Ásia",25,36],["Turquia",39,35,"Ásia",12,85],
+["Tailândia",15,101,"Ásia",27,72],["Mongólia",47,104,"Ásia",-0.5,3.4],["Irã",32,53,"Ásia",17,89],["Paquistão",30,70,"Ásia",21,240],
+["Vietnã",16,108,"Ásia",24,99],["Filipinas",12,122,"Ásia",27,117],["Austrália",-25,134,"Oceania",22,26.6],["Nova Zelândia",-41,174,"Oceania",11,5.2],
+["Guiana",5,-59,ASu,26,0.8],["Suriname",4,-56,ASu,27,0.62],
+["Antígua e Barbuda",17.1,-61.8,ANo,27,0.1],["Bahamas",25,-77.4,ANo,25,0.41],["Barbados",13.2,-59.5,ANo,27,0.28],["Belize",17.2,-88.5,ANo,26,0.41],["Costa Rica",9.7,-84,ANo,23,5.2],["Dominica",15.4,-61.4,ANo,26,0.07],["El Salvador",13.8,-88.9,ANo,25,6.3],["Granada",12.1,-61.7,ANo,27,0.12],["Haiti",19,-72.4,ANo,25,11.7],["Honduras",15,-86.6,ANo,24,10.4],["Jamaica",18.1,-77.3,ANo,26,2.8],["Nicarágua",12.9,-85,ANo,26,6.9],["Panamá",8.5,-80,ANo,26,4.4],["República Dominicana",19,-70.5,ANo,25,11.3],["São Cristóvão e Névis",17.3,-62.7,ANo,27,0.05],["Santa Lúcia",13.9,-61,ANo,27,0.18],["São Vicente e Granadinas",13.2,-61.2,ANo,27,0.1],["Trinidad e Tobago",10.5,-61.3,ANo,26,1.5],
+["Albânia",41,20,EUR,13,2.8],["Andorra",42.5,1.6,EUR,8,0.08],["Áustria",47.5,14.5,EUR,8,9.1],["Bélgica",50.6,4.7,EUR,10,11.7],["Bielorrússia",53.7,28,EUR,7,9.2],["Bósnia e Herzegovina",44,18,EUR,10,3.2],["Bulgária",42.7,25,EUR,11,6.4],["Chipre",35,33,EUR,19,1.3],["Croácia",45.1,15.2,EUR,12,3.9],["Dinamarca",56,10,EUR,8,5.9],["Eslováquia",48.7,19.5,EUR,9,5.4],["Eslovênia",46.1,14.8,EUR,9,2.1],["Estônia",58.6,25,EUR,6,1.4],["Finlândia",64,26,EUR,2,5.6],["Hungria",47,19.5,EUR,10,9.6],["Irlanda",53.2,-8,EUR,10,5.3],["Islândia",65,-18,EUR,2,0.38],["Letônia",57,25,EUR,6,1.9],["Liechtenstein",47.2,9.5,EUR,9,0.04],["Lituânia",55.2,24,EUR,7,2.9],["Luxemburgo",49.8,6.1,EUR,9,0.66],["Macedônia do Norte",41.6,21.7,EUR,10,1.8],["Malta",35.9,14.4,EUR,19,0.53],["Moldávia",47,28.5,EUR,10,2.6],["Mônaco",43.7,7.4,EUR,16,0.04],["Montenegro",42.7,19.4,EUR,11,0.62],["Países Baixos",52.2,5.3,EUR,10,17.9],["República Tcheca",49.8,15.5,EUR,9,10.9],["Romênia",46,25,EUR,10,19],["Rússia",61,100,EUR,-5,144],["San Marino",43.9,12.5,EUR,13,0.034],["Sérvia",44,21,EUR,11,6.7],["Suíça",46.8,8.2,EUR,6,8.8],["Ucrânia",49,32,EUR,8,37],["Vaticano",41.9,12.45,EUR,16,0.001],
+["Argélia",28,3,AFR,23,45],["Benin",9.5,2.3,AFR,27,13.7],["Botsuana",-22,24,AFR,21,2.6],["Burkina Faso",12.3,-1.7,AFR,28,23],["Burundi",-3.4,29.9,AFR,20,13],["Cabo Verde",16,-24,AFR,24,0.6],["Camarões",6,12.5,AFR,25,28],["Chade",15,19,AFR,27,18],["Comores",-11.9,43.9,AFR,26,0.85],["Congo",-1,15.5,AFR,25,6],["Costa do Marfim",7.5,-5.5,AFR,26,28],["Djibuti",11.8,42.6,AFR,29,1.1],["Eritreia",15.3,39,AFR,24,3.7],["Eswatini",-26.5,31.5,AFR,20,1.2],["Gabão",-0.8,11.6,AFR,25,2.4],["Gâmbia",13.5,-15.5,AFR,27,2.7],["Gana",8,-1.2,AFR,27,34],["Guiné",10.9,-10.9,AFR,26,14],["Guiné-Bissau",12,-15,AFR,27,2.1],["Guiné Equatorial",1.7,10.5,AFR,25,1.7],["Lesoto",-29.6,28.2,AFR,12,2.3],["Libéria",6.5,-9.5,AFR,26,5.4],["Líbia",27,17,AFR,22,6.9],["Malaui",-13.5,34,AFR,22,21],["Mali",17,-4,AFR,28,23],["Mauritânia",20,-10.5,AFR,28,4.9],["Maurício",-20.3,57.6,AFR,23,1.3],["Moçambique",-18.5,35,AFR,24,34],["Namíbia",-22,17,AFR,21,2.6],["Níger",16,8,AFR,29,27],["República Centro-Africana",7,21,AFR,26,5.7],["República Democrática do Congo",-3,23.5,AFR,24,102],["Ruanda",-2,30,AFR,19,14],["São Tomé e Príncipe",0.2,6.6,AFR,26,0.23],["Senegal",14.5,-14.5,AFR,28,18],["Serra Leoa",8.5,-11.8,AFR,26,8.6],["Seicheles",-4.7,55.5,AFR,27,0.1],["Somália",5,46,AFR,28,18],["Sudão",15.5,30,AFR,28,48],["Sudão do Sul",7,30,AFR,27,11],["Tanzânia",-6.4,34.9,AFR,22,67],["Togo",8.6,1,AFR,27,9],["Tunísia",34,9.5,AFR,20,12],["Uganda",1.4,32.3,AFR,23,48],["Zâmbia",-13.5,28,AFR,21,20],["Zimbábue",-19,29.8,AFR,21,16],
+["Afeganistão",33,65,ASI,13,42],["Armênia",40,45,ASI,7,3],["Azerbaijão",40.4,47.7,ASI,12,10.3],["Bahrein",26,50.5,ASI,27,1.5],["Bangladesh",24,90,ASI,26,173],["Brunei",4.5,114.7,ASI,27,0.45],["Butão",27.5,90.5,ASI,8,0.78],["Camboja",12.5,105,ASI,27,17],["Catar",25.3,51.2,ASI,28,2.7],["Cazaquistão",48,68,ASI,6,20],["Cingapura",1.35,103.8,ASI,27,5.9],["Coreia do Norte",40,127,ASI,9,26],["Coreia do Sul",36.5,128,ASI,12,51.7],["Emirados Árabes Unidos",24,54,ASI,28,10],["Geórgia",42,43.5,ASI,10,3.7],["Iêmen",15.5,48,ASI,24,34],["Iraque",33,44,ASI,22,45],["Israel",31.5,35,ASI,20,9.8],["Jordânia",31,36.5,ASI,18,11.3],["Kuwait",29.3,47.5,ASI,26,4.3],["Laos",19,102.5,ASI,25,7.6],["Líbano",33.9,35.9,ASI,18,5.4],["Malásia",4,102,ASI,27,34],["Maldivas",3.2,73.2,ASI,28,0.52],["Mianmar",21,96,ASI,25,54],["Nepal",28.4,84.1,ASI,15,30],["Omã",21,57,ASI,27,5.2],["Quirguistão",41.5,75,ASI,3,7],["Sri Lanka",7.9,80.7,ASI,27,22],["Síria",35,38,ASI,18,23],["Tadjiquistão",38.9,71,ASI,3,10],["Timor-Leste",-8.8,125.7,ASI,26,1.4],["Turcomenistão",39,59.5,ASI,16,6.5],["Uzbequistão",41.4,64.6,ASI,13,36],["Palestina",31.9,35.2,ASI,19,5.5],
+["Fiji",-17.7,178,OCE,25,0.93],["Ilhas Marshall",7.1,171,OCE,28,0.04],["Ilhas Salomão",-9.6,160,OCE,26,0.74],["Kiribati",1.4,173,OCE,28,0.13],["Micronésia",6.9,158.2,OCE,27,0.11],["Nauru",-0.5,166.9,OCE,28,0.012],["Palau",7.5,134.6,OCE,28,0.018],["Papua-Nova Guiné",-6,147,OCE,25,10.3],["Samoa",-13.8,-172,OCE,27,0.22],["Tonga",-21.2,-175.2,OCE,25,0.1],["Tuvalu",-8.5,179,OCE,28,0.011],["Vanuatu",-16,167,OCE,25,0.33]
+];
+const ADJ={"América do Norte":["América do Sul"],"América do Sul":["América do Norte"],"Europa":["Ásia","África"],"África":["Europa","Ásia"],"Ásia":["Europa","África","Oceania"],"Oceania":["Ásia"]};
+const TRIES=6,ROUNDS=5;
+const $=s=>document.querySelector(s);
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+const pad=n=>String(n).padStart(6,'0');
+let st,snd=true,ac,rec=0;
+try{rec=+localStorage.getItem('pais-misterioso-recorde')||0}catch(e){}
+
+function beep(seq){if(!snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();let t=ac.currentTime;seq.forEach(([f,d])=>{const o=ac.createOscillator(),g=ac.createGain();o.type='square';o.frequency.value=f;g.gain.value=.04;o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d);t+=d})}catch(e){}}
+
+function dist(a,b){const R=6371,r=Math.PI/180,dl=(b[2]-a[2])*r,dp=(b[1]-a[1])*r;
+const h=Math.sin(dp/2)**2+Math.cos(a[1]*r)*Math.cos(b[1]*r)*Math.sin(dl/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function dir(a,b){const r=Math.PI/180,dl=(b[2]-a[2])*r,y=Math.sin(dl)*Math.cos(b[1]*r),
+x=Math.cos(a[1]*r)*Math.sin(b[1]*r)-Math.sin(a[1]*r)*Math.cos(b[1]*r)*Math.cos(dl);
+const d=(Math.atan2(y,x)/r+360)%360;return["N","NE","L","SE","S","SO","O","NO"][Math.round(d/45)%8]}
+const pop=m=>m>=1000?(m/1000).toFixed(2).replace('.',',')+' bi':m>=10?Math.round(m)+' mi':m>=1?m.toFixed(1).replace('.',',')+' mi':Math.max(1,Math.round(m*1000))+' mil';
+const hem=c=>(c[1]>=0?'Norte':'Sul')+' / '+(c[2]>=0?'Leste':'Oeste');
+const coord=c=>Math.abs(Math.round(c[1]))+'° '+(c[1]>=0?'N':'S')+', '+Math.abs(Math.round(c[2]))+'° '+(c[2]>=0?'L':'O');
+const word={r:'LONGE',y:'PERTO',g:'CERTO'};
+
+function evaluate(g,t){
+  const same=(g[1]>=0)===(t[1]>=0),sameL=(g[2]>=0)===(t[2]>=0),n=(same?1:0)+(sameL?1:0);
+  const dt=g[4]-t[4],ratio=g[5]/t[5],km=Math.round(dist(g,t));
+  const T=[];
+  T.push({l:'HEMISFÉRIO',v:hem(g),h:n===2?'':n===0?'Lat. e long. diferentes':(!same?'Latitude diferente':'Longitude diferente'),s:n===2?'g':n===1?'y':'r'});
+  T.push({l:'CONTINENTE',v:g[3].toUpperCase(),h:g[3]===t[3]?'':(ADJ[g[3]].includes(t[3])?'Continente vizinho':'Continente distante'),s:g[3]===t[3]?'g':ADJ[g[3]].includes(t[3])?'y':'r'});
+  const ta=Math.abs(dt);
+  T.push({l:'TEMPERATURA',v:String(g[4]).replace('.',',')+' °C',h:ta<=1?'':(dt>0?'Mais frio':'Mais quente'),s:ta<=1?'g':ta<=5?'y':'r'});
+  T.push({l:'POPULAÇÃO',v:pop(g[5]),h:Math.abs(ratio-1)<=.1?'':(ratio>1?'Menos gente':'Mais gente'),s:Math.abs(ratio-1)<=.1?'g':(ratio<=2&&ratio>=.5)?'y':'r'});
+  T.push({l:'COORDENADAS',v:coord(g),h:km<500?'':km.toLocaleString('pt-BR')+' km, rumo '+dir(g,t),s:km<500?'g':km<2500?'y':'r'});
+  if(g===t)T.forEach(x=>{x.s='g';x.h=''});
+  return T;
+}
+
+function show(id){['title','game','end'].forEach(x=>$('#'+x).classList.toggle('hidden',x!==id));window.scrollTo(0,0)}
+function say(t,c){const m=$('#msg');m.textContent=t;m.className='msg '+(c||'')}
+function hud(){
+  $('#hs').textContent=pad(st.score);$('#hh').textContent=pad(Math.max(rec,st.score));
+  $('#hr').textContent='1-'+(st.r+1);
+  $('#hl').textContent='●'.repeat(TRIES-st.g.length)+'○'.repeat(st.g.length);
+}
+function newGame(){
+  st={r:0,score:0,streak:0,wins:0,pool:[...C].sort(()=>Math.random()-.5).slice(0,ROUNDS)};
+  show('game');startRound();
+}
+function startRound(){
+  st.t=st.pool[st.r];st.g=[];st.done=false;
+  $('#rows').innerHTML='';$('#next').classList.add('hidden');
+  $('#in').disabled=false;$('#ok').disabled=false;$('#in').value='';
+  say('Qual é o país secreto? Digite e escolha da lista.');hud();$('#in').focus();
+}
+function addRow(c){
+  const tiles=evaluate(c,st.t).map(x=>`<div class="t ${x.s}"><b>${x.l}</b><span>${x.v}</span><em>${x.h||'&nbsp;'}</em><i>${word[x.s]}</i></div>`).join('');
+  const d=document.createElement('div');d.className='guess';
+  d.innerHTML=`<div class="rh"><span>${c[0].toUpperCase()}</span><span>${st.g.length}/${TRIES}</span></div><div class="tiles">${tiles}</div>`;
+  $('#rows').prepend(d);
+}
+function guess(){
+  if(st.done)return;
+  const inp=$('#in'),c=C.find(x=>norm(x[0])===norm(inp.value));
+  if(!c){say('País não encontrado. Escolha um nome da lista.','bad');beep([[160,.12]]);return}
+  if(st.g.includes(c)){say('Você já tentou esse país.','bad');return}
+  st.g.push(c);inp.value='';addRow(c);
+  if(c===st.t)finish(true);
+  else if(st.g.length>=TRIES)finish(false);
+  else{say('Ainda não. '+(TRIES-st.g.length>1?'Restam '+(TRIES-st.g.length)+' tentativas.':'Resta 1 tentativa.'));beep([[330,.06]])}
+  hud();inp.focus();
+}
+function finish(win){
+  st.done=true;$('#in').disabled=true;$('#ok').disabled=true;
+  if(win){
+    const base=1000-150*(st.g.length-1),bonus=100*st.streak;
+    st.score+=base+bonus;st.streak++;st.wins++;
+    say('ACERTOU! +'+base+' pontos'+(bonus?' e +'+bonus+' de bônus por sequência':'')+'.','ok');
+    beep([[988,.08],[1319,.3]]);
+  }else{
+    st.streak=0;say('Fim das tentativas. O país era '+st.t[0].toUpperCase()+'.','bad');beep([[196,.15],[147,.35]]);
+  }
+  $('#next').textContent=st.r+1<ROUNDS?'PRÓXIMA FASE':'VER RESULTADO';
+  $('#next').classList.remove('hidden');hud();$('#next').focus();
+}
+function next(){
+  if(st.r+1<ROUNDS){st.r++;startRound()}else endGame();
+}
+function endGame(){
+  if(st.score>rec){rec=st.score;try{localStorage.setItem('pais-misterioso-recorde',rec)}catch(e){}}
+  const s=st.score,rank=s>=4500?'MESTRE DOS MAPAS':s>=3000?'EXPLORADOR':s>=1500?'VIAJANTE':'TURISTA PERDIDO';
+  $('#fs').textContent=pad(s);$('#fr').textContent='RANK: '+rank;
+  $('#fn').textContent='Países descobertos: '+st.wins+' de '+ROUNDS+'. Recorde: '+pad(rec);
+  show('end');$('#again').focus();
+}
+
+$('#dl').innerHTML=C.map(x=>x[0]).sort((a,b)=>a.localeCompare(b,'pt')).map(n=>`<option value="${n}">`).join('');
+$('#rec0').textContent=pad(rec);
+$('#go').onclick=newGame;$('#again').onclick=newGame;$('#ok').onclick=guess;$('#next').onclick=next;
+$('#in').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();guess()}});
+$('#snd').onclick=()=>{snd=!snd;$('#snd').textContent='SOM: '+(snd?'LIGADO':'DESLIGADO')};
+</script>
+</body>
+</html>
